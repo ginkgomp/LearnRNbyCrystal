@@ -1,0 +1,17 @@
+{
+    "fileheader.Author": "wenwen sun",
+    "fileheader.LastModifiedBy": "wenwen sun",
+    "workbench.colorTheme": "Ayu Light Bordered",
+    "breadcrumbs.enabled": true,
+    "javascript.format.insertSpaceAfterOpeningAndBeforeClosingNonemptyBrackets": true,
+    "indentRainbow.errorColor": "rgba(128,32,32,0.3)",
+    "indentRainbow.colors": [
+        "rgba(64,64,16,0.05)",
+        "rgba(32,64,32,0.05)",
+        "rgba(64,32,64,0.05)",
+        "rgba(16,48,48,0.05)"
+    ],
+    "emptyIndent.highlightColor": "rgba(246,36,89,0.5)",
+    "editor.formatOnType": true
+
+}

@@ -1,0 +1,3 @@
+rootProject.name = 'LearnRNbyCrystal'
+
+include ':app'
