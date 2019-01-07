@@ -76,6 +76,6 @@ let styles = StyleSheet.create({
     color: 'grey',
     marginBottom: 15,
     backgroundColor: 'green',
-    fontSize:30
+    fontSize:28
   }
 });
