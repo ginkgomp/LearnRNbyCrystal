@@ -9,7 +9,7 @@
 import React, {Component} from 'react';
 //import {StyleSheet, View, Text, Clipboard} from 'react-native';
 import  DiaryList  from "./DiaryList";
-
+import DiaryReader from './DiaryReader';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -20,11 +20,17 @@ export default class App extends Component<Props> {
     );
   }
 
+  showDiaryReader() {
+    return (
+      <DiaryReader />
+    );
+  }
 
 
   render() {
 
-    return this.showDiaryList();
+    //return this.showDiaryList();
+    return this.showDiaryReader();
 
   }
 
