@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-07 16:08:18
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-07 16:25:27
+ * @Last Modified time: 2019-01-09 16:40:41
  */
 
 
@@ -13,8 +13,13 @@ import MCV from './commonvariable';
 
 
 export default class DiaryList extends Component{
-    updateSearchKeyword(newWord) {
 
+    constructor(props) {
+        super(props);
+        this.updateSearchKeyword = this.updateSearchKeyword.bind(this);
+    }
+    updateSearchKeyword(newWord) {
+        this.props.searchKeyWord(newWord);
     }
 
     render() {
@@ -25,18 +30,18 @@ export default class DiaryList extends Component{
                     <View style={{ borderWidth: 1 }}>
                         <TextInput autoCapitalize="none" placeholder='输入搜索关键字' clearButtonMode="while-editing" onChangeText={this.updateSearchKeyword} style={MCV.searchBarTextInput} />
                     </View>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.writeDiary}>
                         <Text style={MCV.middleButton}>写日记</Text>
                     </TouchableOpacity>
                 </View>
                 <View style={MCV.diaryAbstractList}>
                     <View style={MCV.secondRow}>
-                        <Image style={MCV.moodStyle} source={puppy1} />
+                        <Image style={MCV.moodStyle} source={this.props.diaryListMood} />
                         <View style={MCV.subViewInReader}>
                             <TouchableOpacity onPress={this.props.selectListItem}>
-                                <Text style={MCV.textInReader}>列表标题</Text>
+                                <Text style={MCV.textInReader}>{this.props.diaryListTitle}</Text>
                             </TouchableOpacity>
-                            <Text style={MCV.textInReader}>列表时间</Text>
+                            <Text style={MCV.textInReader}>{this.props.diaryListTime}</Text>
                         </View>
                     </View>
                 </View>
