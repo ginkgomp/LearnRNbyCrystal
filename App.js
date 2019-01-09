@@ -8,8 +8,9 @@
 
 import React, {Component} from 'react';
 //import {StyleSheet, View, Text, Clipboard} from 'react-native';
-import  DiaryList  from "./DiaryList";
+import DiaryList  from './DiaryList';
 import DiaryReader from './DiaryReader';
+import DiaryWriter from './DiaryWriter';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -26,12 +27,18 @@ export default class App extends Component<Props> {
     );
   }
 
+  showDiaryWriter() {
+    return (
+      <DiaryWriter />
+    )
+  }
+
 
   render() {
 
     //return this.showDiaryList();
-    return this.showDiaryReader();
-
+    //return this.showDiaryReader();
+    return this.showDiaryWriter();
   }
 
 }
