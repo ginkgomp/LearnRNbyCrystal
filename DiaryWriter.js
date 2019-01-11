@@ -4,8 +4,8 @@ import MCV from './commonvariable';
 
 export default class DiaryWriter extends Component{
 
-    constructor(Props) {
-        super(Porps);
+    constructor(props) {
+        super(props);
 
         this.diaryTitle = null;
         this.diaryBody = null;
@@ -29,7 +29,7 @@ export default class DiaryWriter extends Component{
             '请确认',
             '你确定要退回日记列表吗？',
             [
-                { text: '确定', onPress:this.props.returnToList },
+                { text: '确定', onPress: this.props.returnToList },
                 { text: '取消' }
             ]
         );
@@ -44,10 +44,10 @@ export default class DiaryWriter extends Component{
         }
         switch (this.moodCode) {
             case 1:
-                tempString = '现在的心情： 平静';
+                tempString = '现在的心情：平静';
                 break;
             case 2:
-                tempString = '现在的心情： 愤怒';
+                tempString = '现在的心情：愤怒';
                 break;
             case 3:
                 tempString = '现在的心情：悲伤';
@@ -75,9 +75,9 @@ export default class DiaryWriter extends Component{
                         <Text style={MCV.smallButton}>返回</Text>
                     </TouchableOpacity>
                     <TouchableOpacity onPress={this.selectMood}>
-                        <Text style={MCV.longButton}>{this.mood}</Text>
+                        <Text style={MCV.longButton}>{this.state.moodText}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.props.saveDiary(this.moodCode,this.diaryTitle,this.diaryBody)}>
+                    <TouchableOpacity>
                         <Text style={MCV.smallButton}>保存</Text>
                     </TouchableOpacity>
                 </View>

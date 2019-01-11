@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-07 16:08:18
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-09 16:40:41
+ * @Last Modified time: 2019-01-11 15:42:41
  */
 
 
@@ -36,12 +36,12 @@ export default class DiaryList extends Component{
                 </View>
                 <View style={MCV.diaryAbstractList}>
                     <View style={MCV.secondRow}>
-                        <Image style={MCV.moodStyle} source={this.props.diaryListMood} />
+                        <Image style={MCV.moodStyle} source={this.props.diaryMood} />
                         <View style={MCV.subViewInReader}>
                             <TouchableOpacity onPress={this.props.selectListItem}>
-                                <Text style={MCV.textInReader}>{this.props.diaryListTitle}</Text>
+                                <Text style={MCV.textInReader}>{this.props.diaryTitle}</Text>
                             </TouchableOpacity>
-                            <Text style={MCV.textInReader}>{this.props.diaryListTime}</Text>
+                            <Text style={MCV.textInReader}>{this.props.diaryTime}</Text>
                         </View>
                     </View>
                 </View>

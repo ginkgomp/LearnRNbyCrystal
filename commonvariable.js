@@ -36,7 +36,8 @@ let MCV = StyleSheet.create({
         width: textSize*10,
         borderRadius: 8,           //设置了圆角风络，在iPhone平台上显示正常，但在Android
         textAlign:'center',       //手机上没有圆角风格，所以下面的Android手机运行截图
-        fontSize: textSize        //中的按钮都是直角的。在真正商用开发时，还是尽量让美工
+        fontSize: textSize
+               //中的按钮都是直角的。在真正商用开发时，还是尽量让美工
     },                               //出图，用Image做按钮
     middleButton: {               //长度适中的Text按钮样式
         height:textSize *1.4 ,
