@@ -1,3 +1,10 @@
+/*
+ * @Author: wenwen sun
+ * @Date: 2019-01-11 16:08:15
+ * @Last Modified by: wenwen sun
+ * @Last Modified time: 2019-01-11 16:53:05
+ */
+
 import React, { Component } from 'react';
 import { View, Text, TextInput, TouchableOpacity, Alert, StatusBar } from 'react-native';
 import MCV from './commonvariable';
@@ -77,7 +84,7 @@ export default class DiaryWriter extends Component{
                     <TouchableOpacity onPress={this.selectMood}>
                         <Text style={MCV.longButton}>{this.state.moodText}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity>
+                    <TouchableOpacity onPress={this.props.saveDiary(this.moodCode,this.diaryTitle,this.diaryBody)}>
                         <Text style={MCV.smallButton}>保存</Text>
                     </TouchableOpacity>
                 </View>

@@ -1,3 +1,9 @@
+/*
+ * @Author: wenwen sun
+ * @Date: 2019-01-11 16:08:30
+ * @Last Modified by: wenwen sun
+ * @Last Modified time: 2019-01-11 16:53:20
+ */
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -5,6 +11,8 @@
  * @format
  * @flow
  */
+
+
 
 import React, {Component} from 'react';
 //import {StyleSheet, View, Text, Clipboard} from 'react-native';
@@ -23,8 +31,8 @@ export default class App extends Component<Props> {
       diaryMood: null,
       diaryTitle: '读取中。。。',
       diaryTime: '读取中。。。',
-      diaryBody: '读取中。。。'
-
+      diaryBody: '读取中。。。',
+      diaryIndex: 0
     };
 
     this.bindAllFunctions();
@@ -89,14 +97,15 @@ export default class App extends Component<Props> {
     return (
       <DiaryList writeDiary={this.writeDiary} diaryMood={this.state.diaryMood}
         diaryTitle={this.state.diaryTitle} diaryTime={this.state.diaryTime}
-        selectListItem={this.selectListItem}/>
+        selectListItem={this.selectListItem} diaryIndex={this.state.diaryIndex}/>
     );
   }
 
   showDiaryReader() {
     return (
       <DiaryReader returnToList={this.returnToList} prevDiary={this.prevDiary} nextDiary={this.nextDiary}
-        diaryMood={this.state.diaryMood} diaryTitle={this.state.diaryTitle} diaryTime={this.state.diaryTime} diaryBody={this.state.diaryBody}/>
+        diaryMood={this.state.diaryMood} diaryTitle={this.state.diaryTitle} diaryTime={this.state.diaryTime} diaryBody={this.state.diaryBody}
+        diaryIndex={this.state.diaryIndex}/>
     );
   }
 
