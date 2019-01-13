@@ -16,21 +16,63 @@ let mood5 = require('./image/WechatIMG5.jpeg');
 
 export default class DataHandler {
 
-    saveDiary() {
-        return new Promise(
-            function (resolve, reject) {
-                AsyncStorage.setItem('','')
-                    .then(
+    saveDiary(moodCode, diaryTitle, diaryBody) {
+        return new Promise((resolve, reject) => {
+            let currTime = new Date(); //get current diary time
+            let diaryIndex = 0;
 
+            let newDiary = Object(); //create an object to store new created diary detail
+            newDiary.title = diaryTitle;
+            newDiary.body = diaryBody;
+            newDiary.mood = moodCode;
+            newDiary.time = currTime;
+            newDiary.index = diaryIndex++;
+            let diaryContent = JSON.stringify(newDiary);
+            AsyncStorage.setItem(newDiary.index, diaryContent)
+                .then(() => {
+                    //define new diary's mood pic
+                    let diaryMoodIcon;
+                    switch (moodCode) {
+                        case 2:
+                            diaryMoodIcon = mood2;
+                        case 3:
+                            diaryMoodIcon = mood3;
+                        case 4:
+                            diaryMoodIcon = mood4;
+                        case 5:
+                            diaryMoodIcon = mood5;
+                        default:
+                            diaryMoodIcon = mood1;
+                    }
+                        
+                    let lastDiary = {
+                        uiCode: 1,
+                        diaryMood: diaryMoodIcon,
+                        diaryTitle: diaryTitle,
+                        diaryTime: currTime,
+                        diaryBody: diaryBody,
+                        diaryIndex: newDiary.index
+                    };
 
-                    )
-                    .catch(
-                        (error) => {
-                            console.log('Saving failed.' + error.message);
-                        }
-                    );
+                    resolve(lastDiary);
+            
+                })
+                .catch(
+                    (error) => {
+                        console.log('Saving failed.' + error.message);
+                    }
+                );
 
-            }
-        )
+        });
     }
+
+
+    getPrevDiary() {
+        return null;
+    }
+
+    getNextDiary() {
+        return null;
+    }
+
 }

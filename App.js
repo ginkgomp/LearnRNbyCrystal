@@ -19,6 +19,7 @@ import React, {Component} from 'react';
 import DiaryList  from './DiaryList';
 import DiaryReader from './DiaryReader';
 import DiaryWriter from './DiaryWriter';
+import DataHandler from './DataHandler';
 
 type Props = {};
 export default class App extends Component<Props> {
@@ -82,14 +83,27 @@ export default class App extends Component<Props> {
 
 
   prevDiary() {
+    DataHandler.getPrevDiary();
 
   }
 
   nextDiary() {
+    DataHandler.getNextDiary();
 
   }
 
-  saveDiary(moodCode,diaryTitle,diaryBody) {
+  saveDiary(moodCode, diaryTitle, diaryBody) {
+    DataHandler.saveDiary(moodCode, diaryTitle, diaryBody)
+      .then(
+        (res) => {
+          this.setState(res);
+        }
+
+      ).catch(
+        (err) => {
+          console.log(err);
+        }
+      );
 
   }
 
