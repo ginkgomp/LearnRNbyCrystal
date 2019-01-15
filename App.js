@@ -1,9 +1,10 @@
 /*
  * @Author: wenwen sun
- * @Date: 2019-01-11 16:08:30
+ * @Date: 2019-01-15 16:33:38
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-11 16:53:20
+ * @Last Modified time: 2019-01-15 16:34:03
  */
+
 /**
  * Sample React Native App
  * https://github.com/facebook/react-native
@@ -16,6 +17,7 @@
 
 import React, {Component} from 'react';
 //import {StyleSheet, View, Text, Clipboard} from 'react-native';
+import { Alert } from 'react-native';
 import DiaryList  from './DiaryList';
 import DiaryReader from './DiaryReader';
 import DiaryWriter from './DiaryWriter';
@@ -48,6 +50,7 @@ export default class App extends Component<Props> {
     this.prevDiary = this.prevDiary.bind(this);
     this.nextDiary = this.nextDiary.bind(this);
     this.saveDiary = this.saveDiary.bind(this);
+    this.showAllDiaries = this.showAllDiaries.bind(this);
 
   }
 
@@ -64,6 +67,15 @@ export default class App extends Component<Props> {
 
     });
   }
+
+
+  //show the list of all diaries
+  showAllDiaries() {
+
+    //DataHandler.diaryStoreList
+
+  }
+
 
   //if user select one of diary title
   selectListItem() {
@@ -83,12 +95,53 @@ export default class App extends Component<Props> {
 
 
   prevDiary() {
-    DataHandler.getPrevDiary();
+    DataHandler.getPrevDiary(this.state.diaryIndex)
+      .then(
+        (res) => {
+          if (res === null) {
+            Alert.alert(
+              '提示',
+              '当前已为第一篇日记了',
+              [
+                { text: '确定', onPress: this.props.returnToList },
+                { text: '取消' }
+              ]
+            );
+          } else {
+            this.setState(res);
+          }
+        }
+    ).catch(
+      (err) => {
+        console.log(err);
+        }
+
+      );
 
   }
 
   nextDiary() {
-    DataHandler.getNextDiary();
+    DataHandler.getNextDiary(this.state.diaryIndex)
+      .then(
+        (res) => {
+          if (res === null) {
+            Alert.alert(
+              '提示',
+              '当前已为最新一篇日记了',
+              [
+                { text: '确定', onPress: this.props.returnToList },
+                { text: '取消' }
+              ]
+            );
+          } else {
+            this.setState(res);
+          }
+        }
+    ).catch(
+      (err) => {
+        console.log(err);
+        }
+      );
 
   }
 
@@ -125,7 +178,7 @@ export default class App extends Component<Props> {
 
   showDiaryWriter() {
     return (
-      <DiaryWriter returnToList={this.returnToList} />
+      <DiaryWriter returnToList={this.returnToList} saveDiary={this.saveDiary} />
     );
   }
 

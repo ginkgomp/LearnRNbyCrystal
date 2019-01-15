@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-11 16:08:15
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-11 16:53:05
+ * @Last Modified time: 2019-01-14 14:40:47
  */
 
 import React, { Component } from 'react';
@@ -14,11 +14,11 @@ export default class DiaryWriter extends Component{
     constructor(props) {
         super(props);
 
-        this.diaryTitle = null;
         this.diaryBody = null;
+        this.diaryTitle = null;
         this.moodCode = 0;
         this.state = {
-            moodText: '请选择心情'
+            moodText: '请选择心情',
 
         };
 
@@ -29,6 +29,9 @@ export default class DiaryWriter extends Component{
     bindAllFunctions() {
         this.returnPressed = this.returnPressed.bind(this);
         this.selectMood = this.selectMood.bind(this);
+        this.updateTitle = this.updateTitle.bind(this);
+        this.updateBody = this.updateBody.bind(this);
+
     }
 
     returnPressed() {
@@ -73,6 +76,14 @@ export default class DiaryWriter extends Component{
         });
     }
 
+    updateTitle(text) {
+        this.diaryTitle = text;
+    }
+
+    updateBody=(text)=> {
+        this.diaryBody = text;
+    }
+
     render() {
         return (
             <View style={MCV.container}>
@@ -84,12 +95,12 @@ export default class DiaryWriter extends Component{
                     <TouchableOpacity onPress={this.selectMood}>
                         <Text style={MCV.longButton}>{this.state.moodText}</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={this.props.saveDiary(this.moodCode,this.diaryTitle,this.diaryBody)}>
+                    <TouchableOpacity onPress={()=>this.props.saveDiary(this.moodCode,this.diaryTitle,this.diaryBody)}>
                         <Text style={MCV.smallButton}>保存</Text>
                     </TouchableOpacity>
                 </View>
-                <TextInput style={MCV.titleInputStyle} placeholder={'写个日记标题吧'} onChangeText={this.diaryTitle} />
-                <TextInput style={MCV.diaryBodyStyle} multiline={true} placeholder={'日记正文请在此输入'} onChangeText={this.diaryBody} />
+                <TextInput style={MCV.titleInputStyle} placeholder={'写个日记标题吧'} onChangeText={this.updateTitle} />
+                <TextInput style={MCV.diaryBodyStyle} multiline={true} placeholder={'日记正文请在此输入'} onChangeText={this.updateBody} />
             </View>
         );
     }
