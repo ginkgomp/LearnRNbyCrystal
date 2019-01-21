@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-15 16:33:38
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-15 16:34:03
+ * @Last Modified time: 2019-01-21 10:42:41
  */
 
 /**
@@ -40,6 +40,8 @@ export default class App extends Component<Props> {
 
     this.bindAllFunctions();
 
+    this.showAllDiaries();
+
   }
 
   bindAllFunctions() {
@@ -72,7 +74,15 @@ export default class App extends Component<Props> {
   //show the list of all diaries
   showAllDiaries() {
 
-    //DataHandler.diaryStoreList
+    DataHandler.getAllDiaries()
+      .then((res) => {
+        this.setState(res);
+
+      }).catch(
+        (err) => {
+          console.log(err);
+        }
+      );
 
   }
 
@@ -88,8 +98,6 @@ export default class App extends Component<Props> {
   returnToList() {
     this.setState({
         uiCode: 1
-
-
     });
    }
 
@@ -151,7 +159,6 @@ export default class App extends Component<Props> {
         (res) => {
           this.setState(res);
         }
-
       ).catch(
         (err) => {
           console.log(err);

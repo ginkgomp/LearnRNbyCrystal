@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-11 16:08:08
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-15 16:21:14
+ * @Last Modified time: 2019-01-21 15:45:12
  */
 
 
@@ -88,7 +88,6 @@ export default class DataHandler {
 
     static getPrevDiary(diaryIndex) {
 
-
         return new Promise((resolve, reject) => {
 
             AsyncStorage.getItem(''+(diaryIndex-1))
@@ -98,7 +97,10 @@ export default class DataHandler {
 
                     //console.log(resJson);
 
-                    if (resJson.index === 0) resolve(null);
+                    if (resJson === null || resJson.index === 0) {
+                        resolve(null);
+                        return;
+                    }
 
                     let prevDiary = {
                         uiCode: 2,
@@ -117,8 +119,6 @@ export default class DataHandler {
                         console.log(error.message);
                     }
                 )
-
-
         });
     }
 
@@ -132,7 +132,10 @@ export default class DataHandler {
 
                     //console.log(resJson);
 
-                    if (resJson.index > DataHandler.diaryStoreList.length) resolve(null);
+                    if (resJson === null || resJson.index > DataHandler.diaryStoreList.length) {
+                        resolve(null);
+                        return;
+                    }
 
                     let prevDiary = {
                         uiCode: 2,
@@ -152,7 +155,77 @@ export default class DataHandler {
                     }
                 )
 
+        });
+    }
 
+
+    static getAllDiaries() {
+
+        return new Promise((resolve, reject) => {
+            AsyncStorage.getAllKeys()
+                .then((res) => {
+                    //const resJson = JSON.parse(res);
+                    console.log(res);
+                    //console.log(resJson.diaryIndex);
+
+                    if (res === null) {
+                        let returnValue = {
+                            uiCode: 1,
+                            diaryMood: null,
+                            diaryTitle: 'no history',
+                            diaryTime: 'no history',
+                            diaryBody: 'no history',
+                            diaryIndex: 0
+                        }
+
+
+                        resolve(returnValue);
+                        return;
+                    }
+
+
+                    AsyncStorage.multiGet(res)
+                        .then((result) => {
+                            console.log(result);
+                            let returnValue = {
+                                uiCode: 1,
+                                diaryMood: result.mood,
+                                diaryTitle: result.title,
+                                diaryTime: result.time,
+                                diaryBody: result.body,
+                                diaryIndex: result.index
+                            }
+                            resolve(returnValue);
+                            return;
+                        })
+                        .catch((err) => {
+                            console.log(err.message);
+                        });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                }
+
+
+            ).catch(
+                (error) => {
+                    console.log(error);
+                    }
+
+                );
         });
     }
 
