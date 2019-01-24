@@ -2,7 +2,7 @@
  * @Author: wenwen sun
  * @Date: 2019-01-15 16:33:38
  * @Last Modified by: wenwen sun
- * @Last Modified time: 2019-01-21 10:42:41
+ * @Last Modified time: 2019-01-24 10:17:07
  */
 
 /**
@@ -31,6 +31,7 @@ export default class App extends Component<Props> {
 
     this.state = {
       uiCode: 1,
+      diaryList:[],
       diaryMood: null,
       diaryTitle: '读取中。。。',
       diaryTime: '读取中。。。',
@@ -76,7 +77,7 @@ export default class App extends Component<Props> {
 
     DataHandler.getAllDiaries()
       .then((res) => {
-        this.setState(res);
+        this.setState({ diaryList: res });
 
       }).catch(
         (err) => {
@@ -88,10 +89,9 @@ export default class App extends Component<Props> {
 
 
   //if user select one of diary title
-  selectListItem() {
-    this.setState({
-      uiCode:2
-    })
+  selectListItem(index) {
+    let selectedDiary = DataHandler.getDiaryAtIndex(index);
+    this.setState(selectedDiary);
   }
 
 
@@ -171,7 +171,9 @@ export default class App extends Component<Props> {
     return (
       <DiaryList writeDiary={this.writeDiary} diaryMood={this.state.diaryMood}
         diaryTitle={this.state.diaryTitle} diaryTime={this.state.diaryTime}
-        selectListItem={this.selectListItem} diaryIndex={this.state.diaryIndex}/>
+        selectListItem={this.selectListItem} diaryIndex={this.state.diaryIndex}
+        diaryList={this.state.diaryList}
+      />
     );
   }
 
